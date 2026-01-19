@@ -1,9 +1,10 @@
 import arcjet, { detectBot, shield, slidingWindow } from '@arcjet/next'
 import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server'
+import { env } from './data/env/server'
 
 const aj = arcjet({
     // Todo: add type safety for env
-    key: process.env.ARCJET_KEY!,
+    key: env.ARCJET_KEY!,
     rules: [
         shield({mode: "LIVE"}),
         detectBot({
