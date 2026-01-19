@@ -1,8 +1,32 @@
+import arcjet, { detectBot, shield, slidingWindow } from '@arcjet/next'
 import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server'
+
+const aj = arcjet({
+    // Todo: add type safety for env
+    key: process.env.ARCJET_KEY!,
+    rules: [
+        shield({mode: "LIVE"}),
+        detectBot({
+            mode: "LIVE",
+            allow: ['CATEGORY:SEARCH_ENGINE','CATEGORY:PREVIEW','CATEGORY:MONITOR'],
+        }),
+        slidingWindow({
+            mode: "LIVE",
+            interval: "1m",
+            max: 200,
+        })
+    ]
+})
+
 const isPublicRoute = createRouteMatcher([
   '/sign-in(.*)','/'
 ])
 export default clerkMiddleware(async (auth, req)=> {
+    const decision = await aj.protect(req)
+
+    if(decision.isDenied()){
+        return new Response(null, {status: 403})
+    }
     if(!isPublicRoute(req)){
         await auth.protect()
     }
