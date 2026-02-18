@@ -11,13 +11,13 @@ export async function getUser(id: string) {
   cacheTag(getUserIdTag(id));
 
   const allUsers = await db.select().from(UserTable);
-  console.log("[DEBUG actions.getUser] all users seen by app", allUsers);
+  // console.log("[DEBUG actions.getUser] all users seen by app", allUsers);
 
   const user = await db.query.UserTable.findFirst({
     where: eq(UserTable.id, id),
   });
 
-  console.log("[DEBUG actions.getUser] getUser result", { id, user });
+  // console.log("[DEBUG actions.getUser] getUser result", { id, user });
 
   return user;
 }
