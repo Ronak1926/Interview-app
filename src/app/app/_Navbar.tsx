@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import {
   BookOpenIcon,
@@ -7,30 +7,30 @@ import {
   LogOut,
   SpeechIcon,
   User,
-} from "lucide-react"
-import { ThemeToggle } from "@/components/ThemeToggle"
+} from "lucide-react";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { SignOutButton, useClerk } from "@clerk/nextjs"
-import Link from "next/link"
-import { UserAvatar } from "@/components/UserAvatar"
-import { useParams, usePathname } from "next/navigation"
-import { Button } from "@/components/ui/button"
+} from "@/components/ui/dropdown-menu";
+import { SignOutButton, useClerk } from "@clerk/nextjs";
+import Link from "next/link";
+import { UserAvatar } from "@/app/features/users/components/UserAvatar";
+import { useParams, usePathname } from "next/navigation";
+import { Button } from "@/components/ui/button";
 
 const navLinks = [
   { name: "Interviews", href: "interviews", Icon: SpeechIcon },
   { name: "Questions", href: "questions", Icon: BookOpenIcon },
   { name: "Resume", href: "resume", Icon: FileSlidersIcon },
-]
+];
 
 export function Navbar({ user }: { user: { name: string; imageUrl: string } }) {
-  const { openUserProfile } = useClerk()
-  const { jobInfoId } = useParams()
-  const pathName = usePathname()
+  const { openUserProfile } = useClerk();
+  const { jobInfoId } = useParams();
+  const pathName = usePathname();
 
   return (
     <nav className="h-header border-b">
@@ -43,7 +43,7 @@ export function Navbar({ user }: { user: { name: string; imageUrl: string } }) {
         <div className="flex items-center gap-4">
           {typeof jobInfoId === "string" &&
             navLinks.map(({ name, href, Icon }) => {
-              const hrefPath = `/app/job-infos/${jobInfoId}/${href}`
+              const hrefPath = `/app/job-infos/${jobInfoId}/${href}`;
 
               return (
                 <Button
@@ -57,7 +57,7 @@ export function Navbar({ user }: { user: { name: string; imageUrl: string } }) {
                     {name}
                   </Link>
                 </Button>
-              )
+              );
             })}
 
           <ThemeToggle />
@@ -82,5 +82,5 @@ export function Navbar({ user }: { user: { name: string; imageUrl: string } }) {
         </div>
       </div>
     </nav>
-  )
+  );
 }
