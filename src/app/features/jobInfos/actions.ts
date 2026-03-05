@@ -50,15 +50,14 @@ export async function updateJobInfo(
       message: "invalid job data",
     };
   }
-  const existingJobInfo = getJobInfo(id, userId);
+  const existingJobInfo = await getJobInfo(id, userId);
 
   if (existingJobInfo == null) {
     return {
-        error: true, 
-        message: "You don't have permission to do this"
-    }
-
-  } 
+      error: true,
+      message: "You don't have permission to do this",
+    };
+  }
 
   const jobInfo = await updateJobInfoDb(id, data);
 
