@@ -14,7 +14,7 @@ export default function JobInfoBackLink({
 }: {
   jobInfoId: string;
   className?: string;
-  userId: string;
+  userId?: string;
 }) {
   return (
     <BackLink
@@ -22,7 +22,7 @@ export default function JobInfoBackLink({
       className={cn("mb-4", className)}
     >
       <Suspense fallback="Job Description">
-        <JobName jobInfoId={jobInfoId} userId={userId} />
+        <JobName jobInfoId={jobInfoId} userId={userId ?? ""} />
       </Suspense>
     </BackLink>
   );
