@@ -1,4 +1,4 @@
-import { getUserIdTag } from "@/app/features/users/dbCache";
+import { getUserIdTag } from "@/features/users/dbCache";
 import { db } from "@/drizzle/db";
 import { UserTable } from "@/drizzle/schema";
 import { auth } from "@clerk/nextjs/server";
