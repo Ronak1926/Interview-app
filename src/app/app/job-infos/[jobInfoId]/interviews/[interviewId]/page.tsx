@@ -2,10 +2,12 @@ import { BackLink } from "@/components/BackLink";
 import { MarkdownRenderer } from "@/components/MarkdownRenderer";
 import { Skeleton, SkeletonButton } from "@/components/Skeleton";
 import { SuspendedItem } from "@/components/SuspendedItem";
+import { ActionButton } from "@/components/ui/action-button";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { db } from "@/drizzle/db";
 import { InterviewTable } from "@/drizzle/schema";
+import { generateInterviewFeedback } from "@/features/interviews/actions";
 import { getInterviewIdTag } from "@/features/interviews/dbCache";
 import { getJobInfoIdTag } from "@/features/jobInfos/dbCache";
 import { formatDateTime } from "@/lib/formatters";
@@ -59,7 +61,7 @@ export default async function InterviewPage({ params }: {
                         fallback={<SkeletonButton />}
                         // TODO: Feedback
                         result={i => i.feedback == null ?
-                            null : (
+                            <ActionButton action={() => generateInterviewFeedback(interviewId)}>Generate feedback</ActionButton> : (
                                 <Dialog>
                                     <DialogTrigger asChild>
                                         <Button>
