@@ -13,7 +13,7 @@ export function getInterviewIdTag(id: string) {
   return getIdTag("interviews", id);
 }
 
-export function revalidateJobInfoCache({
+export function revalidateInterviewCache({
   id,
   jobInfoId,
 }: {

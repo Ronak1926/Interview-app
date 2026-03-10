@@ -1,4 +1,4 @@
-import { JobInfoForm } from "@/app/features/jobInfos/components/JobInfoForm";
+import { JobInfoForm } from "@/features/jobInfos/components/JobInfoForm";
 import { BackLink } from "@/components/BackLink";
 import { Card, CardContent } from "@/components/ui/card";
 
@@ -11,7 +11,7 @@ export default function JobInfoNewPage() {
       </h1>
       <Card>
         <CardContent>
-          <JobInfoForm/>
+          <JobInfoForm />
         </CardContent>
       </Card>
     </div>

@@ -3,7 +3,7 @@
 import { Loader2Icon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
-import { getUser } from "../features/users/actions";
+import { getUser } from "@/features/users/actions";
 
 export function OnboardingClient({ userId }: { userId: string }) {
   const router = useRouter();
