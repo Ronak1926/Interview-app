@@ -1,4 +1,4 @@
-import JobInfoBackLink from "@/features/jobInfos/components/JobInfoBackLink";
+import { JobInfoBackLink } from "@/features/jobInfos/components/JobInfoBackLink";
 import { JobInfoForm } from "@/features/jobInfos/components/JobInfoForm";
 import { getJobInfoIdTag } from "@/features/jobInfos/dbCache";
 import { Card, CardContent } from "@/components/ui/card";
@@ -26,7 +26,7 @@ export default async function JobInfoEditPage({
 
   return (
     <div className="container my-4 max-w-5xl space-y-4">
-      <JobInfoBackLink jobInfoId={jobInfoId} userId={userId} />
+      <JobInfoBackLink jobInfoId={jobInfoId} />
 
       <h1 className="text-3xl md:text-4xl">Edit Job Description</h1>
 
