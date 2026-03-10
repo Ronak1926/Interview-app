@@ -5,7 +5,7 @@ type JsonMessage = Hume.empathicVoice.JsonMessage
 type ReturnChatEvent = Hume.empathicVoice.ReturnChatEvent
 type Message = JsonMessage | ConnectionMessage | ReturnChatEvent
 
-export function condensedChatMessages(messages: Message[]) {
+export function condenseChatMessages(messages: Message[]) {
     return messages.reduce((acc, message) => {
         const data = getChatEventData(message) ?? getJsonMessageData(message)
         if (data == null || data.content == null) {

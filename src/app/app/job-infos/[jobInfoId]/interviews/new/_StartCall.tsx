@@ -6,7 +6,7 @@ import { JobInfoTable, UserTable } from "@/drizzle/schema"
 import { createInterview, updateInterview } from "@/features/interviews/actions"
 import { errorToast } from "@/lib/errorToast"
 import { CondensedMessages } from "@/services/hume/component/CondesedMessage"
-import { condensedChatMessages } from "@/services/hume/lib/condensedChatMessages"
+import { condenseChatMessages } from "@/services/hume/lib/condenseChatMessages"
 import { useVoice, VoiceReadyState } from "@humeai/voice-react"
 import { Loader2Icon, MicIcon, MicOffIcon, PhoneOffIcon, XIcon } from "lucide-react"
 import { useRouter } from "next/navigation"
@@ -123,7 +123,7 @@ export function StartCall({
 function Messages({ user }: { user: { name: string, imageUrl: string } }) {
     const { messages, fft } = useVoice()
     const condensedMessages = useMemo(() => {
-        return condensedChatMessages(messages)
+        return condenseChatMessages(messages)
     }, [messages])
     return <CondensedMessages messages={condensedMessages} user={user} maxFft={Math.max(...fft)} className="max-w-xl" />
 }
