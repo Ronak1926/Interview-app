@@ -8,6 +8,23 @@ import { and, eq } from "drizzle-orm"
 import { InterviewTable, JobInfoTable } from "@/drizzle/schema"
 import { insertInterview, updateInterview as updateInterviewDb } from "./db"
 import { getInterviewIdTag } from "./dbCache"
+import { canCreateInterview } from "./permissions"
+import { PLAN_LIMIT_MESSAGE, RATE_LIMIT_MESSAGE } from "@/lib/errorToast"
+import arcjet, { request, tokenBucket } from "@arcjet/next"
+import { env } from "@/data/env/server"
+
+const aj = arcjet({
+    characteristics: ['userId'],
+    key: env.ARCJET_KEY,
+    rules: [
+        tokenBucket({
+            capacity: 12,
+            refillRate: 4, // number of token added after everyday
+            interval: "1d",
+            mode: "LIVE"
+        })
+    ]
+})
 
 export async function createInterview({
     jobInfoId,
@@ -27,8 +44,26 @@ export async function createInterview({
             message: "You don't have permission to do this."
         }
     }
-    // TODO: Permission
-    // TODO: Rate limit
+    //  Permission
+    if (!(await canCreateInterview())) {
+        return {
+            error: true,
+            message: PLAN_LIMIT_MESSAGE
+        }
+    }
+    // Rate limit
+    const decision = await aj.protect(await request(), {
+        userId,
+        requested: 1,
+    })
+
+    if (decision.isDenied()) {
+        return {
+            error: true,
+            message: RATE_LIMIT_MESSAGE
+        }
+    }
+
     // job info
     const jobInfo = await getJobInfo(jobInfoId, userId)
 
