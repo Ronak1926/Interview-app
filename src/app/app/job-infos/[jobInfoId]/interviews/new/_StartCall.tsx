@@ -74,7 +74,7 @@ export function StartCall({
         return (
             <div className="flex justify-center items-center h-screen-header">
                 <Button size="lg" onClick={async () => {
-                    // TODO: create Interview
+                    // create Interview
                     const res = await createInterview({ jobInfoId: jobInfo.id })
                     if (res.error) {
                         return errorToast(res.message)
