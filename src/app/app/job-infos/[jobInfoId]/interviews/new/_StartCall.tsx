@@ -9,7 +9,7 @@ import { CondensedMessages } from "@/services/hume/component/CondesedMessage"
 import { condensedChatMessages } from "@/services/hume/lib/condensedChatMessages"
 import { useVoice, VoiceReadyState } from "@humeai/voice-react"
 import { Loader2Icon, MicIcon, MicOffIcon, PhoneOffIcon, XIcon } from "lucide-react"
-import router from "next/router"
+import { useRouter } from "next/navigation"
 import { useEffect, useMemo, useRef, useState } from "react"
 
 type JobInfo = Pick<
@@ -22,7 +22,7 @@ type User = {
     imageUrl: string
 }
 
-export async function StartCall({
+export function StartCall({
     jobInfo,
     user,
     accessToken
@@ -31,6 +31,7 @@ export async function StartCall({
     user: User
     accessToken: string
 }) {
+    const router = useRouter()
     const [interviewId, setInterviewId] = useState<string | null>(null)
     const { connect, disconnect, chatMetadata, readyState, callDurationTimestamp } = useVoice()
 
