@@ -9,9 +9,9 @@ import {
 } from "@/components/ui/card";
 import { db } from "@/drizzle/db";
 import { JobInfoTable } from "@/drizzle/schema";
-import { JobInfoForm } from "../features/jobInfos/components/JobInfoForm";
-import { getJobInfoUserTag } from "../features/jobInfos/dbCache";
-import { formatExperienceLevel } from "../features/jobInfos/lib/formatters";
+import { JobInfoForm } from "@/features/jobInfos/components/JobInfoForm";
+import { getJobInfoUserTag } from "@/features/jobInfos/dbCache";
+import { formatExperienceLevel } from "@/features/jobInfos/lib/formatters";
 import { getCurrentUser } from "@/services/clerk/lib/getCurrentUser";
 import { desc, eq } from "drizzle-orm";
 import { ArrowRightIcon, Loader2Icon, PlusIcon } from "lucide-react";

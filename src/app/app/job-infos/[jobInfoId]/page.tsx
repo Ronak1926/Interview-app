@@ -1,5 +1,5 @@
-import { getJobInfoIdTag } from "@/app/features/jobInfos/dbCache";
-import { formatExperienceLevel } from "@/app/features/jobInfos/lib/formatters";
+import { getJobInfoIdTag } from "@/features/jobInfos/dbCache";
+import { formatExperienceLevel } from "@/features/jobInfos/lib/formatters";
 import { BackLink } from "@/components/BackLink";
 import { Skeleton } from "@/components/Skeleton";
 import { SuspendedItem } from "@/components/SuspendedItem";

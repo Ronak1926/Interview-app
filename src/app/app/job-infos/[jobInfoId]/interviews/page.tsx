@@ -1,6 +1,6 @@
-import { getInterviewJobInfoTag } from "@/app/features/interviews/dbCache";
-import JobInfoBackLink from "@/app/features/jobInfos/components/JobInfoBackLink";
-import { getJobInfoIdTag } from "@/app/features/jobInfos/dbCache";
+import { getInterviewJobInfoTag } from "@/features/interviews/dbCache";
+import JobInfoBackLink from "@/features/jobInfos/components/JobInfoBackLink";
+import { getJobInfoIdTag } from "@/features/jobInfos/dbCache";
 import { db } from "@/drizzle/db";
 import { InterviewTable } from "@/drizzle/schema";
 import { getCurrentUser } from "@/services/clerk/lib/getCurrentUser";
@@ -38,7 +38,7 @@ async function SuspendedPage({ jobInfoId }: { jobInfoId: string }) {
   const interviews = await getInterviews(jobInfoId, userId);
 
   if (interviews.length === 0) {
-    return redirect(`/job-infos/${jobInfoId}/interviews/new`);
+    return redirect(`/app/job-infos/${jobInfoId}/interviews/new`);
   }
   return <div>Interview for Job Info ID: {jobInfoId}</div>;
 }

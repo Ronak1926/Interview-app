@@ -17,7 +17,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { SignOutButton, useClerk } from "@clerk/nextjs";
 import Link from "next/link";
-import { UserAvatar } from "@/app/features/users/components/UserAvatar";
+import { UserAvatar } from "@/features/users/components/UserAvatar";
 import { useParams, usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 

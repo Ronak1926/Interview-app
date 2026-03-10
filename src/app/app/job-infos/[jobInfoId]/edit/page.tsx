@@ -1,6 +1,6 @@
-import JobInfoBackLink from "@/app/features/jobInfos/components/JobInfoBackLink";
-import { JobInfoForm } from "@/app/features/jobInfos/components/JobInfoForm";
-import { getJobInfoIdTag } from "@/app/features/jobInfos/dbCache";
+import JobInfoBackLink from "@/features/jobInfos/components/JobInfoBackLink";
+import { JobInfoForm } from "@/features/jobInfos/components/JobInfoForm";
+import { getJobInfoIdTag } from "@/features/jobInfos/dbCache";
 import { Card, CardContent } from "@/components/ui/card";
 import { db } from "@/drizzle/db";
 import { JobInfoTable } from "@/drizzle/schema";
