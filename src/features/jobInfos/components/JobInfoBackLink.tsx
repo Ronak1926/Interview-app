@@ -1,20 +1,18 @@
 import { BackLink } from "@/components/BackLink";
-import { cn } from "@/lib/utils";
-import { cacheTag } from "next/cache";
-import { Suspense } from "react";
-import { getJobInfoIdTag } from "../dbCache";
 import { db } from "@/drizzle/db";
 import { JobInfoTable } from "@/drizzle/schema";
-import { and, eq } from "drizzle-orm";
+import { cn } from "@/lib/utils";
+import { eq } from "drizzle-orm";
+import { cacheTag } from "next/dist/server/use-cache/cache-tag";
+import { Suspense } from "react";
+import { getJobInfoIdTag } from "../dbCache";
 
-export default function JobInfoBackLink({
+export function JobInfoBackLink({
   jobInfoId,
   className,
-  userId,
 }: {
   jobInfoId: string;
   className?: string;
-  userId?: string;
 }) {
   return (
     <BackLink
@@ -22,35 +20,22 @@ export default function JobInfoBackLink({
       className={cn("mb-4", className)}
     >
       <Suspense fallback="Job Description">
-        <JobName jobInfoId={jobInfoId} userId={userId ?? ""} />
+        <JobName jobInfoId={jobInfoId} />
       </Suspense>
     </BackLink>
   );
 }
 
-async function JobName({
-  jobInfoId,
-  userId,
-}: {
-  jobInfoId: string;
-  userId: string;
-}) {
-  const jobInfo = await getJobInfo(jobInfoId, userId);
+async function JobName({ jobInfoId }: { jobInfoId: string }) {
+  const jobInfo = await getJobInfo(jobInfoId);
   return jobInfo?.name ?? "Job Description";
 }
 
-async function getJobInfo(id: string, userId: string) {
+async function getJobInfo(id: string) {
   "use cache";
   cacheTag(getJobInfoIdTag(id));
-  const jobInfo = await db.query.JobInfoTable.findFirst({
-    where: and(eq(JobInfoTable.id, id), eq(JobInfoTable.userId, userId)),
-    columns: {
-      id: true,
-      name: true,
-      title: true,
-      description: true,
-      experienceLevel: true,
-    },
+
+  return db.query.JobInfoTable.findFirst({
+    where: eq(JobInfoTable.id, id),
   });
-  return jobInfo;
 }
