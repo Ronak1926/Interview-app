@@ -3,7 +3,7 @@ import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 import { env } from "./data/env/server";
 
 const aj = arcjet({
-  // Todo: add type safety for env
+  // add type safety for env
   key: env.ARCJET_KEY!,
   rules: [
     shield({ mode: "LIVE" }),
