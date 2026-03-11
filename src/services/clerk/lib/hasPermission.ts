@@ -6,8 +6,15 @@ type Permission =
     | "unlimited_questions"
     | "1_interview"
     | "5_questions"
-
 export async function hasPermission(permission: Permission) {
     const { has } = await auth()
-    return has({ feature: permission })
+
+    const featureCheck = has({ feature: permission })
+    const permissionCheck = has({ permission: `org:${permission}` })
+
+    console.log("Checking permission:", permission)
+    console.log("feature:", featureCheck)
+    console.log("org permission:", permissionCheck)
+
+    return featureCheck || permissionCheck
 }
