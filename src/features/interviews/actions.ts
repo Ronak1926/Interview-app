@@ -131,6 +131,9 @@ async function getInterview(id: string, userId: string) {
         columns: {
           id: true,
           userId: true,
+          title: true,
+          experienceLevel: true,
+          description: true,
         },
       },
     },
